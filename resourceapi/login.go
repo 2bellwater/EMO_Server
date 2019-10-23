@@ -1,13 +1,15 @@
 package resourceapi
 
 import (
-	"github.com/gin-gonic/gin"
+	"database/sql"
 	"net/http"
+
+	"github.com/gin-gonic/gin"
 )
 
-func SetLoginAPI(router *gin.Engine){
+func SetLoginAPI(router *gin.Engine, db *sql.DB) {
 
-	router.GET("/hello/", func(context *gin.Context) {
+	router.GET("/login/", func(context *gin.Context) {
 		context.String(http.StatusOK, "Hello")
 	})
 }
