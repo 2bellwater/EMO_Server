@@ -1,6 +1,6 @@
 package model
 
 type Hellomodel struct {
-	Name string
-	Age int
+	Name 		string
+	Favorite 	string
 }
