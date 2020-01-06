@@ -18,16 +18,17 @@ type DBConfig struct {
 
 func GetDBConfig() *DBConfig{
 	onece.Do(func() {
-
-		dbconfig := &DBConfig{}
-
-		dbconfig.DBtype = DBTYPE
-		dbconfig.DBuser = DBUSER
-		dbconfig.DBname = DBNAME
-		dbconfig.DBpassword = DBPASSWORD
-		dbconfig.DBendpoint = DBENDPOINT
-		dbconfig.DBport = DBPORT
+		loadConfig()
 	})
 
 	return dbconfig
+}
+
+func loadConfig(){
+	dbconfig.DBtype = DBTYPE
+	dbconfig.DBuser = DBUSER
+	dbconfig.DBname = DBNAME
+	dbconfig.DBpassword = DBPASSWORD
+	dbconfig.DBendpoint = DBENDPOINT
+	dbconfig.DBport = DBPORT
 }

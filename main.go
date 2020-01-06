@@ -15,7 +15,9 @@ func main() {
 
 	router := gin.Default()
 
+	cmd.SetDBAutomigration(db)
 	cmd.SetRestAPI(router, db)
+
 	router.Run(":8080")
 
 }
