@@ -1,4 +1,4 @@
-package cmd
+package databases
 
 import (
 	"github.com/jinzhu/gorm"
@@ -8,6 +8,5 @@ import (
 
 func SetDBAutomigration(db *gorm.DB){
 
-	db.AutoMigrate(&database.User{})
-
+	db.AutoMigrate(&database.UserAccount{})
 }

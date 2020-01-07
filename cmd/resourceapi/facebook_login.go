@@ -21,7 +21,7 @@ func SetFaceBookLoginAPI(router *gin.Engine, db *gorm.DB) {
 			return
 		}
 
-		user := database.User{}
+		user := database.UserAccount{}
 
 
 		if err := db.Find(&user,"UserID=?",testmsg.UserID); err != nil{
@@ -39,7 +39,7 @@ func SetFaceBookLoginAPI(router *gin.Engine, db *gorm.DB) {
 			return
 		}
 
-		user := database.User{
+		user := database.UserAccount{
 			UserID:testmsg.UserID,
 			UserToken:testmsg.UserToken,
 		}

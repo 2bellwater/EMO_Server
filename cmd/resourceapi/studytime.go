@@ -11,18 +11,18 @@ func SetStudyTimeUpdate(router *gin.Engine, db *gorm.DB){
 
 	router.POST("/timer/update", func(context *gin.Context){
 
-		user := database.User{}
+		updateUserAccount := database.UserAccount{}
 
-		if err := context.ShouldBindJSON(&user); err != nil {
+		if err := context.ShouldBindJSON(&updateUserAccount); err != nil {
 			context.JSON(http.StatusBadRequest, gin.H{"error" : err.Error()})
 			return
 		}
 
-		userInfo := database.User{}
+		currentUserAccount := database.UserAccount{}
 
-		db.First(&userInfo,"user_id = ?",user.UserID)
-		db.Model(&userInfo).Update("total_study_time",userInfo.TotalStudyTime + user.TodayStudyTime)
-		db.Model(&userInfo).Update("today_study_time",userInfo.TodayStudyTime + user.TodayStudyTime)
+		db.First(&currentUserAccount,"user_id = ?", updateUserAccount.UserID)
+		db.Model(&currentUserAccount).Update("total_study_time", currentUserAccount.TotalStudyTime + updateUserAccount.TodayStudyTime)
+		db.Model(&currentUserAccount).Update("today_study_time", currentUserAccount.TodayStudyTime + updateUserAccount.TodayStudyTime)
 
 		context.JSON(http.StatusOK,gin.H{"status" : "success"})
 	})

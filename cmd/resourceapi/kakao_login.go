@@ -10,25 +10,18 @@ import (
 	"net/http"
 )
 
-type t struct {
-	NickName				string	`json:"nickName, string"`
-	ProfileImageURL			string	`json:"profileImageURL, string"`
-	ThumbnailURL			string	`json:"thumbnailURL, string"`
-	CountryISO				string	`json:"countryISO, string"`
-}
-
 func SetKakaoLoginAPI(router *gin.Engine, db *gorm.DB) {
 
 	router.POST("/login/kakao", func(context *gin.Context) {
 
-		user := database.User{}
+		userAccount := database.UserAccount{}
 
-		if err := context.ShouldBindJSON(&user); err != nil{
+		if err := context.ShouldBindJSON(&userAccount); err != nil{
 			context.JSON(http.StatusBadRequest, gin.H{"error" : err.Error()})
 			return
 		}
 
-		profileURL := "https://kapi.kakao.com/v1/api/talk/profile?access_token="+user.UserToken
+		profileURL := "https://kapi.kakao.com/v1/api/talk/profile?access_token="+ userAccount.UserToken
 		resp, err := http.Get(profileURL)
 		defer resp.Body.Close()
 		if err != nil {
@@ -40,14 +33,14 @@ func SetKakaoLoginAPI(router *gin.Engine, db *gorm.DB) {
 			fmt.Println("Read kakao profile error : " + err.Error())
 		}
 
-		err = json.Unmarshal(body, user.Kakaoprofile)
+		err = json.Unmarshal(body, &userAccount.KakaoProfile)
 		if err != nil {
 			fmt.Println("Unmarshal kakao profile error : " + err.Error())
 		}
 
-		if isNew := db.NewRecord(&user); isNew == true {
-			fmt.Println("New kakao user created!")
-			db.Create(&user)
+		if isNew := db.NewRecord(&userAccount); isNew == true {
+			fmt.Println("New kakao userAccount created!")
+			db.Create(&userAccount)
 		}
 
 		context.JSON(http.StatusOK,gin.H{"status" : "success"})
