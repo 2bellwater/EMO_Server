@@ -12,8 +12,8 @@ func SetHelloAPI(router *gin.Engine, db *gorm.DB) {
 
 	router.GET("/hello/", func(context *gin.Context) {
 		m := model.Hellomodel{
-			Name: "Ahyun",
-			Favorite:  "Potato",
+			Name:     "Ahyun",
+			Favorite: "Potato",
 		}
 		context.JSON(http.StatusOK, m)
 	})

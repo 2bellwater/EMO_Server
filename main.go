@@ -1,28 +1,45 @@
 package main
 
 import (
-	"fmt"
-	"github.com/gin-gonic/gin"
-	"github.com/jinzhu/gorm"
-	_ "github.com/jinzhu/gorm/dialects/mysql"
-	"github.com/waker_server/cmd"
+	"github.com/waker_server/cmd/auth"
+	"github.com/waker_server/cmd/configs"
 	"github.com/waker_server/cmd/databases"
+	"github.com/waker_server/cmd/webframework"
 )
 
 func main() {
 
-	db, err := gorm.Open("mysql", "root:jspassword@(127.0.0.1:3306)/jsdatabase?charset=utf8&parseTime=True&loc=Local")
-	if err != nil{
-		fmt.Println("DB connection ERROR")
-		panic(err)
+	SGConfig := configs.GetSroundConfig()
+
+	//init database
+	var gormDB databases.GormDB
+	var err error
+
+	if SGConfig.DatabaseType == configs.SG_DB_MYSQL {
+		gormDB, err = databases.NewGormDB(SGConfig.MySQLConfig)
+		if err != nil {
+			//TODO
+		}
 	}
-	defer db.Close()
 
-	router := gin.Default()
+	//http web framework
+	var router *webframework.GinRouter
+	router = webframework.NewGinWebFrameWork()
 
-	databases.SetDBAutomigration(db)
-	cmd.SetRestAPI(router, db)
+	//auth
+	var authAPIs []auth.Auth
+	for _, a := range SGConfig.LoginType {
+		if a == configs.SG_AUTH_KAKAO {
+			kakaoLoginApi := auth.NewKakaoLoginAPI(router.Engine, gormDB.DB)
+			kakaoLoginApi.OnLoginAPI()
+			authAPIs = append(authAPIs, kakaoLoginApi)
+		}
+		if a == configs.SG_AUTH_FACEBOOK {
+			facebookLoginApi := auth.NewFaceBookLoginAPI(router.Engine, gormDB.DB)
+			facebookLoginApi.OnLoginAPI()
+			authAPIs = append(authAPIs, facebookLoginApi)
+		}
+	}
 
-	router.Run(":8080")
-
+	router.Run()
 }

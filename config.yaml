@@ -1,0 +1,9 @@
+database:
+  type: "mysql"
+  mysql:
+    user: "root"
+    password: "jspassword"
+    endpoint: "127.0.0.1:3306"
+    dbname: "jsdatabase"
+auth:
+  logintype: ["kakao", "facebook"]

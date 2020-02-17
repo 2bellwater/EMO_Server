@@ -12,8 +12,6 @@ func SetRestAPI(router *gin.Engine, db *gorm.DB) {
 
 	// auth rest api
 	resourceapi.SetHelloAPI(router, db)
-	resourceapi.SetKakaoLoginAPI(router, db)
-	resourceapi.SetFaceBookLoginAPI(router,db)
 
 	// db rest api
 	resourceapi.SetStudyTimeUpdate(router, db)

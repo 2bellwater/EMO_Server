@@ -8,6 +8,7 @@ type UserAccount struct {
 	TodayStudyTime	int64			`json:"todaystudytime"`
 	//Profile			KakaoProfile
 	KakaoProfile
+	FriendsMatchingArray
 }
 
 type KakaoProfile struct {
@@ -16,3 +17,9 @@ type KakaoProfile struct {
 	ThumbnailURL			string	`json:"thumbnailURL"`
 	CountryISO				string	`json:"countryISO"`
 }
+
+type FriendsMatchingArray struct {
+	Master					string `json:"master" gorm:"foreignkey:UserID"`
+	Slave					string `json:"slave"  gorm:"foreignkey:UserID"`
+}
+
