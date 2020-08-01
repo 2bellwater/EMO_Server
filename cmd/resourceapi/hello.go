@@ -4,8 +4,8 @@ import (
 	"github.com/jinzhu/gorm"
 	"net/http"
 
+	"github.com/EMO_Server/pkg/model"
 	"github.com/gin-gonic/gin"
-	"github.com/waker_server/pkg/model"
 )
 
 func SetHelloAPI(router *gin.Engine, db *gorm.DB) {

@@ -59,7 +59,7 @@ func GetSroundConfig() SroundConfig {
 }
 
 func getProjectPath() string {
-	return os.Getenv("GOPATH") + "/src/github.com/waker_server"
+	return os.Getenv("GOPATH") + "/src/github.com/EMO_Server"
 }
 
 func getString(key string) string {

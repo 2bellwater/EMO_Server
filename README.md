@@ -1,4 +1,4 @@
-# waker_server
+# EMO_Server
 ***
 port:8080
 ***

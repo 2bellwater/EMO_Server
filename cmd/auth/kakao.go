@@ -3,9 +3,9 @@ package auth
 import (
 	"encoding/json"
 	"fmt"
+	"github.com/EMO_Server/pkg/database"
 	"github.com/gin-gonic/gin"
 	"github.com/jinzhu/gorm"
-	"github.com/waker_server/pkg/database"
 	"io/ioutil"
 	"net/http"
 )

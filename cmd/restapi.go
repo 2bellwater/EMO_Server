@@ -1,9 +1,9 @@
 package cmd
 
 import (
+	"github.com/EMO_Server/cmd/resourceapi"
 	"github.com/gin-gonic/gin"
 	"github.com/jinzhu/gorm"
-	"github.com/waker_server/cmd/resourceapi"
 	//"database/sql"
 	//_ "github.com/go-sql-driver/mysql"
 )

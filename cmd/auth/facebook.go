@@ -1,9 +1,9 @@
 package auth
 
 import (
+	"github.com/EMO_Server/pkg/database"
 	"github.com/gin-gonic/gin"
 	"github.com/jinzhu/gorm"
-	"github.com/waker_server/pkg/database"
 	"net/http"
 )
 

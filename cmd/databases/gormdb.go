@@ -2,9 +2,9 @@ package databases
 
 import (
 	"fmt"
+	"github.com/EMO_Server/cmd/configs"
+	"github.com/EMO_Server/pkg/database"
 	"github.com/jinzhu/gorm"
-	"github.com/waker_server/cmd/configs"
-	"github.com/waker_server/pkg/database"
 	"log"
 )
 
