@@ -41,6 +41,6 @@ func main() {
 		}
 	}
 
-  //http router run
+  //http router run.
 	router.Run()
 }
